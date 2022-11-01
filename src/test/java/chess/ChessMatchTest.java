@@ -27,6 +27,20 @@ public class ChessMatchTest {
     }
 
     @Test
+    public void givenAPieceMovementWhenCaptureOponentPieceThenUpdatePiecesLists(){
+        ChessMatch chessMatch = new ChessMatch();
+        ChessPosition sourcePosition = new ChessPosition('e', 7);
+        ChessPosition targetPosition = new ChessPosition('e', 8);
+        Rook oponentRook = new Rook(chessMatch.getBoard(), Color.WHITE);
+        chessMatch.getBoard().placePiece(oponentRook, sourcePosition.toPosition());
+
+        chessMatch.performChessMove(sourcePosition, targetPosition);
+
+        Assert.assertEquals(chessMatch.getPiecesOnTheBoard().size(), 2);
+        Assert.assertEquals(chessMatch.getCapturedPieces().size(), 1);
+    }
+
+    @Test
     public void givenAChessMovePieceWhenTargetPositionHasAPieceThenReturnThisPiece(){
         ChessMatch chessMatch = new ChessMatch();
         ChessPosition sourcePosition = new ChessPosition('e', 1);
