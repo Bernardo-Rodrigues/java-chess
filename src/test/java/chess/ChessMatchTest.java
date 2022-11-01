@@ -4,6 +4,7 @@ import boardgame.Position;
 import org.junit.Assert;
 import org.junit.Test;
 import pieces.King;
+import pieces.Rook;
 
 public class ChessMatchTest {
     @Test
@@ -17,8 +18,8 @@ public class ChessMatchTest {
     @Test
     public void givenAChessPieceWhenPerformAMoveThenPlaceThePieceCorretly(){
         ChessMatch chessMatch = new ChessMatch();
-        ChessPosition sourcePosition = new ChessPosition('e', 8);
-        ChessPosition targetPosition = new ChessPosition('e', 5);
+        ChessPosition sourcePosition = new ChessPosition('e', 1);
+        ChessPosition targetPosition = new ChessPosition('e', 2);
 
         chessMatch.performChessMove(sourcePosition, targetPosition);
 
@@ -28,8 +29,10 @@ public class ChessMatchTest {
     @Test
     public void givenAChessMovePieceWhenTargetPositionHasAPieceThenReturnThisPiece(){
         ChessMatch chessMatch = new ChessMatch();
-        ChessPosition sourcePosition = new ChessPosition('e', 8);
-        ChessPosition targetPosition = new ChessPosition('e', 1);
+        ChessPosition sourcePosition = new ChessPosition('e', 1);
+        ChessPosition targetPosition = new ChessPosition('e', 2);
+        Rook oponentRook = new Rook(chessMatch.getBoard(), Color.BLACK);
+        chessMatch.getBoard().placePiece(oponentRook, targetPosition.toPosition());
 
         ChessPiece capturedPiece = chessMatch.performChessMove(sourcePosition, targetPosition);
 
