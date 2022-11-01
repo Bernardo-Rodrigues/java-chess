@@ -35,4 +35,28 @@ public class ChessMatchTest {
 
         Assert.assertNotNull(capturedPiece);
     }
+
+    @Test
+    public void givenAChosenPieceWhenItsNotOfTheCurrentPlayerThenThrowsException(){
+        ChessMatch chessMatch = new ChessMatch();
+        ChessPosition sourcePosition = new ChessPosition('e', 8);
+        ChessPosition targetPosition = new ChessPosition('e', 1);
+
+        Assert.assertThrows(ChessException.class, () -> chessMatch.performChessMove(sourcePosition, targetPosition));
+    }
+
+    @Test
+    public void givenAValidMoveWhenDoneThenSwitchTurn(){
+        ChessMatch chessMatch = new ChessMatch();
+        ChessPosition sourcePosition = new ChessPosition('e', 1);
+        ChessPosition targetPosition = new ChessPosition('e', 2);
+
+        Assert.assertEquals(chessMatch.getTurn(), 1);
+        Assert.assertEquals(chessMatch.getCurrentPlayer(), Color.WHITE);
+
+        chessMatch.performChessMove(sourcePosition, targetPosition);
+
+        Assert.assertEquals(chessMatch.getTurn(), 2);
+        Assert.assertEquals(chessMatch.getCurrentPlayer(), Color.BLACK);
+    }
 }
