@@ -9,8 +9,8 @@ public class KnightTest {
     @Test
     public void givenAKnightWhenCallToStringThenReturnN(){
         Board board = new Board(8,8);
-        King king = new King(board, Color.BLACK);
+        Knight knight = new Knight(board, Color.BLACK);
 
-        Assert.assertEquals(king.toString(), "N");
+        Assert.assertEquals(knight.toString(), "N");
     }
 }
