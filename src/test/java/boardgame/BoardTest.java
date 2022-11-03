@@ -3,7 +3,7 @@ package boardgame;
 import chess.Color;
 import org.junit.Assert;
 import org.junit.Test;
-import pieces.Rook;
+import chess.pieces.Rook;
 
 public class BoardTest {
     @Test

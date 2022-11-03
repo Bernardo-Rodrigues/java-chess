@@ -6,12 +6,12 @@ import chess.pieces.King;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class KingTest {
+public class PawnTest {
     @Test
-    public void givenAKingWhenCallToStringThenReturnK(){
+    public void givenAPawnWhenCallToStringThenReturnP(){
         Board board = new Board(8,8);
         King king = new King(board, Color.BLACK);
 
-        Assert.assertEquals(king.toString(), "K");
+        Assert.assertEquals(king.toString(), "P");
     }
 }

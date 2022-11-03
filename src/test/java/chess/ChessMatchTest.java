@@ -1,12 +1,9 @@
 package chess;
 
-import application.UI;
-import boardgame.Piece;
-import boardgame.Position;
 import org.junit.Assert;
 import org.junit.Test;
-import pieces.King;
-import pieces.Rook;
+import chess.pieces.King;
+import chess.pieces.Rook;
 
 public class ChessMatchTest {
     @Test

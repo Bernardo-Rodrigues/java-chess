@@ -2,6 +2,7 @@ package pieces;
 
 import boardgame.Board;
 import chess.Color;
+import chess.pieces.Rook;
 import org.junit.Assert;
 import org.junit.Test;
 

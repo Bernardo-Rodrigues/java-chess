@@ -2,7 +2,7 @@ package chess;
 
 import org.junit.Assert;
 import org.junit.Test;
-import pieces.Rook;
+import chess.pieces.Rook;
 
 public class ChessPieceTest {
     @Test
