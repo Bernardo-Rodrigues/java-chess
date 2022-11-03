@@ -1,11 +1,15 @@
 package boardgame;
 
+import chess.ChessMatch;
+
 public class Board {
+    private ChessMatch chessMatch;
     private int rows;
     private int columns;
     private Piece[][] pieces;
 
-    public Board(int rows, int columns) {
+    public Board(int rows, int columns, ChessMatch chessMatch) {
+        this.chessMatch = chessMatch;
         this.rows = rows;
         this.columns = columns;
         pieces = new Piece[rows][columns];
@@ -45,6 +49,7 @@ public class Board {
         if (thereIsAPiece(position)) {
             throw new BoardException("There is already a piece on position " + position);
         }
+        chessMatch.addPieceOnTheBoard(piece);
         pieces[position.getRow()][position.getColumn()] = piece;
         piece.position = position;
     }
@@ -56,6 +61,7 @@ public class Board {
         if (piece(position) == null) {
             return null;
         }
+        chessMatch.removePieceFromTheBoard(piece(position));
         Piece aux = piece(position);
         aux.position = null;
         pieces[position.getRow()][position.getColumn()] = null;

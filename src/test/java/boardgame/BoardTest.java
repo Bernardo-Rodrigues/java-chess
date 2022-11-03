@@ -1,5 +1,6 @@
 package boardgame;
 
+import chess.ChessMatch;
 import chess.Color;
 import org.junit.Assert;
 import org.junit.Test;
@@ -8,32 +9,30 @@ import chess.pieces.Rook;
 public class BoardTest {
     @Test
     public void givenAPlacedPieceWhenVerifyItsPositionThenReturnIt(){
-        Board board = new Board(8,8);
-        Rook rook = new Rook(board, Color.BLACK);
-        Position position = new Position(0,0);
+        ChessMatch chessMatch = new ChessMatch();
+        Rook rook = new Rook(chessMatch.getBoard(), Color.BLACK);
+        Position position = new Position(4,4);
 
-        board.placePiece(rook, position);
+        chessMatch.getBoard().placePiece(rook, position);
 
-        Assert.assertEquals(board.piece(position), rook);
+        Assert.assertEquals(chessMatch.getBoard().piece(position), rook);
     }
 
     @Test
     public void givenARemovedPieceWhenVerifyThatThereIsAPiecePositionThenReturnFalse(){
-        Board board = new Board(8,8);
-        Rook rook = new Rook(board, Color.BLACK);
+        ChessMatch chessMatch = new ChessMatch();
         Position position = new Position(0,0);
 
-        board.placePiece(rook, position);
-        board.removePiece(position);
+        chessMatch.getBoard().removePiece(position);
 
-        Assert.assertEquals(board.thereIsAPiece(position), false);
+        Assert.assertEquals(chessMatch.getBoard().thereIsAPiece(position), false);
     }
 
     @Test
     public void givenANonexistingPositionWhenVerifyIfItExistsThenReturnFalse(){
-        Board board = new Board(8,8);
+        ChessMatch chessMatch = new ChessMatch();
         Position position = new Position(9,9);
 
-        Assert.assertEquals(board.positionExists(position), false);
+        Assert.assertEquals(chessMatch.getBoard().positionExists(position), false);
     }
 }

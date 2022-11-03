@@ -1,5 +1,6 @@
 package chess;
 
+import chess.pieces.Bishop;
 import org.junit.Assert;
 import org.junit.Test;
 import chess.pieces.King;
@@ -40,12 +41,12 @@ public class ChessMatchTest {
     }
 
     @Test
-    public void givenAChessMovePieceWhenTargetPositionHasAPieceThenReturnThisPiece(){
+    public void givenAChessMovePieceWhenTargetPositionHasAnOponentPieceThenReturnThisPiece(){
         ChessMatch chessMatch = new ChessMatch();
-        ChessPosition sourcePosition = new ChessPosition('e', 1);
-        ChessPosition targetPosition = new ChessPosition('e', 2);
-        Rook oponentRook = new Rook(chessMatch.getBoard(), Color.BLACK);
-        chessMatch.getBoard().placePiece(oponentRook, targetPosition.toPosition());
+        ChessPosition sourcePosition = new ChessPosition('a', 4);
+        ChessPosition targetPosition = new ChessPosition('a', 7);
+        Rook oponentRook = new Rook(chessMatch.getBoard(), Color.WHITE);
+        chessMatch.getBoard().placePiece(oponentRook, sourcePosition.toPosition());
 
         ChessPiece capturedPiece = chessMatch.performChessMove(sourcePosition, targetPosition);
 
@@ -79,15 +80,17 @@ public class ChessMatchTest {
     @Test
     public void givenAPieceMoveWhenThePlayerPutHimselfInCheckThenTheMoveShouldBeUndone(){
         ChessMatch chessMatch = new ChessMatch();
-        ChessPosition sourcePosition = new ChessPosition('b', 6);
-        ChessPosition targetPosition = new ChessPosition('d', 6);
+        ChessPosition pawnPosition = new ChessPosition('e', 2);
+        chessMatch.getBoard().removePiece(pawnPosition.toPosition());
+        Bishop bishop = new Bishop(chessMatch.getBoard(), Color.BLACK);
+        ChessPosition bishopPosition = new ChessPosition('f', 3);
+        chessMatch.getBoard().placePiece(bishop, bishopPosition.toPosition());
+        ChessPosition sourcePosition = new ChessPosition('e', 1);
+        ChessPosition targetPosition = new ChessPosition('e', 2);
 
         chessMatch.performChessMove(sourcePosition, targetPosition);
 
-        ChessPosition checkSourcePosition = new ChessPosition('e', 8);
-        ChessPosition checkTargetPosition = new ChessPosition('d', 8);
-
-        Assert.assertThrows(ChessException.class, () -> chessMatch.performChessMove(checkSourcePosition, checkTargetPosition));
-        Assert.assertTrue(chessMatch.getBoard().thereIsAPiece(checkSourcePosition.toPosition()));
+        Assert.assertThrows(ChessException.class, () -> chessMatch.performChessMove(sourcePosition, targetPosition));
+        Assert.assertTrue(chessMatch.getBoard().thereIsAPiece(sourcePosition.toPosition()));
     }
 }

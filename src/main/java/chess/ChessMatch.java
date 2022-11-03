@@ -23,9 +23,18 @@ public class ChessMatch {
         return piecesOnTheBoard;
     }
 
+    public void addPieceOnTheBoard(Piece piece) {
+        piecesOnTheBoard.add(piece);
+    }
+
+    public void removePieceFromTheBoard(Piece piece) {
+        piecesOnTheBoard.remove(piece);
+    }
+
     public List<Piece> getCapturedPieces() {
         return capturedPieces;
     }
+
 
     public boolean getCheck() {
         return check;
@@ -41,7 +50,7 @@ public class ChessMatch {
 
 
     public ChessMatch() {
-        board = new Board(8, 8);
+        board = new Board(8, 8, this);
         turn = 1;
         currentPlayer = Color.WHITE;
         initialSetup();
