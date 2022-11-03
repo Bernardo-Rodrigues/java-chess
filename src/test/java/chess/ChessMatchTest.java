@@ -1,5 +1,7 @@
 package chess;
 
+import application.UI;
+import boardgame.Piece;
 import boardgame.Position;
 import org.junit.Assert;
 import org.junit.Test;
@@ -75,5 +77,20 @@ public class ChessMatchTest {
 
         Assert.assertEquals(chessMatch.getTurn(), 2);
         Assert.assertEquals(chessMatch.getCurrentPlayer(), Color.BLACK);
+    }
+
+    @Test
+    public void givenAPieceMoveWhenThePlayerPutHimselfInCheckThenTheMoveShouldBeUndone(){
+        ChessMatch chessMatch = new ChessMatch();
+        ChessPosition sourcePosition = new ChessPosition('b', 6);
+        ChessPosition targetPosition = new ChessPosition('d', 6);
+
+        chessMatch.performChessMove(sourcePosition, targetPosition);
+
+        ChessPosition checkSourcePosition = new ChessPosition('e', 8);
+        ChessPosition checkTargetPosition = new ChessPosition('d', 8);
+
+        Assert.assertThrows(ChessException.class, () -> chessMatch.performChessMove(checkSourcePosition, checkTargetPosition));
+        Assert.assertTrue(chessMatch.getBoard().thereIsAPiece(checkSourcePosition.toPosition()));
     }
 }
