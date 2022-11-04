@@ -10,7 +10,7 @@ public class PawnTest {
     @Test
     public void givenAPawnWhenCallToStringThenReturnP(){
         ChessMatch chessMatch = new ChessMatch();
-        Pawn pawn = new Pawn(chessMatch.getBoard(), Color.BLACK);
+        Pawn pawn = new Pawn(chessMatch.getBoard(), Color.BLACK, chessMatch);
 
         Assert.assertEquals(pawn.toString(), "P");
     }

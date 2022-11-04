@@ -11,7 +11,7 @@ public class KingTest {
     @Test
     public void givenAKingWhenCallToStringThenReturnK(){
         ChessMatch chessMatch = new ChessMatch();
-        King king = new King(chessMatch.getBoard(), Color.BLACK);
+        King king = new King(chessMatch.getBoard(), Color.BLACK, chessMatch);
 
         Assert.assertEquals(king.toString(), "K");
     }

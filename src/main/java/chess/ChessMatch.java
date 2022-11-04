@@ -14,12 +14,21 @@ public class ChessMatch {
     private Board board;
     private int turn;
     private Color currentPlayer;
-    private List<Piece> piecesOnTheBoard = new ArrayList<>();
-    private List<Piece> capturedPieces = new ArrayList<>();
+    private List<Piece> piecesOnTheBoard;
+    private List<Piece> capturedPieces;
     private boolean check;
     private boolean checkMate;
     private ChessPiece enPassantVulnerable;
     private ChessPiece promoted;
+
+    public ChessMatch() {
+        board = new Board(8, 8, this);
+        turn = 1;
+        currentPlayer = Color.WHITE;
+        piecesOnTheBoard = new ArrayList<>();
+        capturedPieces = new ArrayList<>();
+        initialSetup();
+    }
 
     public ChessPiece getPromoted() {
         return promoted;
@@ -55,14 +64,6 @@ public class ChessMatch {
 
     public Board getBoard(){
         return this.board;
-    }
-
-
-    public ChessMatch() {
-        board = new Board(8, 8, this);
-        turn = 1;
-        currentPlayer = Color.WHITE;
-        initialSetup();
     }
 
     public int getTurn() {
@@ -147,7 +148,6 @@ public class ChessMatch {
 
     private void placeNewPiece(char column, int row, ChessPiece piece) {
         board.placePiece(piece, new ChessPosition(column, row).toPosition());
-        piecesOnTheBoard.add(piece);
     }
 
     public boolean[][] possibleMoves(ChessPosition sourcePosition) {
@@ -364,5 +364,4 @@ public class ChessMatch {
         }
         return true;
     }
-
 }
